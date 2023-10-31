@@ -1,0 +1,6 @@
+{
+    "env": {
+        "mongo_atlas_pw": "CCH",
+        "JWT_KEY": "addkey"
+    }
+}
