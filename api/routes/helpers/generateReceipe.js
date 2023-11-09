@@ -9,7 +9,7 @@ const getGPTResponse = async (ingredients) => {
             {
                 "role": "system",
                 // "content": prompts[type.toString()]
-                "content": `generate a prompt which gives jsonresponse to input. if there are no ingredients provided then makr a indian recipe
+                "content": `generate a prompt which gives jsonresponse to input. if there are no ingredients provided then make a famous continetal recipe. The recipe must be generated using the ingreients provided. No other ingredients. Ingredients like spices and oil are exception. 
                 input format:
                 {
                     Ingredients: [list of ingredients in array format],
@@ -17,7 +17,7 @@ const getGPTResponse = async (ingredients) => {
                 response format:
                 {
                     name: [appropirate name of the recipe]
-                    ingredients: [list of ingredients with quantity used in the recipe],
+                    ingredients: [list of ingredients with quantity used in the recipe, must be array of strings/ingredients],
                     instructions: [prep and cooking recipe with precise instructions, it must be array of strings (steps)]
                 }`
             },
