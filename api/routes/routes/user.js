@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt'); //A library to hash the password
 const jwt = require('jsonwebtoken'); //A library to create token
 
 const usermodel = require('../models/usermodel');
+const recipemodel = require('../models/recipemodel');
 const { default: mongoose } = require('mongoose');
 const { token } = require('morgan');
 
@@ -95,5 +96,11 @@ router.post('/register',(req, res, next) => {
             }
         }).catch()
 });
+
+// 
+router.post('/recipeHistory', async (req, res, next) => {
+    const {email} = req.body
+    await recipemodel.find({email}).then((docs) => res.status(200).json(docs)).catch((err) => console.log(err))
+})
 
 module.exports = router;
