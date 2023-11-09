@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const url = require('url')
+// const recipeCollection = mongoose.collection('recipe')
 
 const recipemodel = require('../models/recipemodel');
 const getGPTResponse = require('../helpers/generateReceipe');
@@ -35,5 +37,23 @@ router.post('/', (req, res, next) => {
         ingredientSend: ingredient
     })
 });
+
+router.get('/recipeHistory', (req, res, next) => {
+    var queryForHistory = url.parse(req.url).query
+    //Get data according to the model
+    var recipes = recipemodel.find({ email: queryForHistory.email }).toArray();
+    //A method use on mongo model to save to database
+    ingredient.
+    ingredient.save().then(result =>{
+        console.log(result);
+    })
+
+    //Throw the error
+    .catch(err => console.log(err));
+    res.status(201).json({
+        message: '',
+        ingredientSend: recipes
+    })
+})
 
 module.exports = router;
