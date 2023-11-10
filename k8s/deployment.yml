@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rg-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rg-backend
+  template:
+    metadata:
+      labels:
+        app: rg-backend
+    spec:
+      containers:
+        - name: rg-backend
+          image: tp6han/rg-backend
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
