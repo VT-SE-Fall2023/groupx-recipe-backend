@@ -6,7 +6,9 @@ const recipeschema = mongoose.Schema({
     //If invalid then not stored    
     email: {type: String, required: true, unique: true
     },
-    ingredientName: {type: [String], required: true} //This mean an array of string
+    name: {required: true, type: String},
+    ingredients: {type: [String], required: true}, //This mean an array of string
+    instructions: {type: [String], required: true}
 });
 
 //First variable will be the model that's going to fit
