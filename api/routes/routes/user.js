@@ -97,7 +97,7 @@ router.post('/register',(req, res, next) => {
         }).catch()
 });
 
-// 
+// Fetch user's recipe history.
 router.post('/recipeHistory', async (req, res, next) => {
     const {email} = req.body
     await recipemodel.find({email}).then((docs) => res.status(200).json(docs)).catch((err) => console.log(err))

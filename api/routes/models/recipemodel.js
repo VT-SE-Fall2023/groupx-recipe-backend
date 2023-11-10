@@ -8,7 +8,8 @@ const recipeschema = mongoose.Schema({
     },
     name: {required: true, type: String},
     ingredients: {type: [String], required: true}, //This mean an array of string
-    instructions: {type: [String], required: true}
+    instructions: {type: [String], required: true},
+    rating: {type: Number, default: null}
 });
 
 //First variable will be the model that's going to fit
