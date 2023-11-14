@@ -9,7 +9,7 @@ const storeRecipe = async (recipe, email) => {
     const {name, ingredients, instructions} = JSON.parse(recipe)
     const ingredient = new recipemodel({
         _id: new mongoose.Types.ObjectId(),
-        email,
+        email: email || "Anonymous@vt.edu",
         name,
         instructions,
         ingredients
