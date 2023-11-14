@@ -1,9 +1,10 @@
 const express = require('express'); //import the package express
+var cors = require('cors')
 const app = express(); //execute express so can use any methods in express
 const morgan = require('morgan'); //import the package morgan package
 const bodyParser = require('body-parser'); //import the package body-parser package
 const mongoose = require('mongoose');
-
+app.use(cors())
 //======================================
 //Connect to mongo database
 //======================================

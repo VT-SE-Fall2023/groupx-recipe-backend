@@ -10,7 +10,7 @@ const storeRecipe = require("../helpers/storeRecipe")
 
 
 // generates a recipe
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     const { ingredients, email } = req.body // parses json parameter called ingredients from the request body
 
     await getGPTResponse(ingredients).then(async resp => {
@@ -25,24 +25,24 @@ router.get('/', async (req, res, next) => {
 
 });
 
-router.post('/', (req, res, next) => {
-    //Get data according to the model
-    const ingredient = new recipemodel({
-        _id: new mongoose.Types.ObjectId(),
-        email: req.body.email,
-        ingredientName: req.body.ingredientName
-    });
-    //A method use on mongo model to save to database
-    ingredient.save().then(result => {
-        console.log(result);
-    })
-        //Throw the error
-        .catch(err => console.log(err));
-    res.status(201).json({
-        message: 'Recipes generated',
-        ingredientSend: ingredient
-    })
-});
+// router.post('/', (req, res, next) => {
+//     //Get data according to the model
+//     const ingredient = new recipemodel({
+//         _id: new mongoose.Types.ObjectId(),
+//         email: req.body.email,
+//         ingredientName: req.body.ingredientName
+//     });
+//     //A method use on mongo model to save to database
+//     ingredient.save().then(result => {
+//         console.log(result);
+//     })
+//         //Throw the error
+//         .catch(err => console.log(err));
+//     res.status(201).json({
+//         message: 'Recipes generated',
+//         ingredientSend: ingredient
+//     })
+// });
 
 // Rate recipe
 router.post('/rate', async (req, res, next) => {
