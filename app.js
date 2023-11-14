@@ -55,8 +55,8 @@ app.use((req, res, next) => {
 //=======================================================
 //Routes that should handle requests
 //=======================================================
-app.use('/recipe', recipeRoutes);
-app.use('/user', userRoutes);
+app.use('/api/v1/recipe', recipeRoutes);
+app.use('/api/v1/user', userRoutes);
 
 //The middle ware that catch all the income that's not caught by mid-ware above
 app.use((req, res, next) => {
