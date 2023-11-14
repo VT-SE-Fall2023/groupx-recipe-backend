@@ -4,7 +4,7 @@ const recipeschema = mongoose.Schema({
     _id: mongoose.Types.ObjectId,
     //Restrict the attribute of data that can store to the database
     //If invalid then not stored    
-    email: {type: String, required: true, unique: true
+    email: {type: String, required: false, unique: true
     },
     name: {required: true, type: String},
     ingredients: {type: [String], required: true}, //This mean an array of string
