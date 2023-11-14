@@ -44,4 +44,19 @@ router.post('/', (req, res, next) => {
     })
 });
 
+// Rate recipe
+router.post('/rate', async (req, res, next) => {
+    const { id, rating } = req.body;
+    try {
+        await recipemodel.updateOne(
+            { _id: id },
+            { $set: { rating: rating } }
+        );
+        res.status(200).send("Rating updated successfully");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 module.exports = router;
