@@ -52,10 +52,10 @@ router.post('/rate', async (req, res, next) => {
             { _id: id },
             { $set: { rating: rating } }
         );
-        res.status(200).send("Rating updated successfully");
+        res.status(200).json({ "message": "Rating updated successfully" })
     } catch (err) {
         console.log(err);
-        res.status(500).send("Internal Server Error");
+        res.status(500).json({ "message": "Error Occured" })
     }
 });
 
