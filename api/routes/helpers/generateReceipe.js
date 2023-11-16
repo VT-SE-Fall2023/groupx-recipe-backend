@@ -17,9 +17,33 @@ const getGPTResponse = async (ingredients) => {
                 response format:
                 {
                     name: [appropirate name of the recipe]
-                    ingredients: [list of ingredients with quantity used in the recipe, must be array of strings/ingredients],
+                    ingredients: [list of ingredients with quantity used in the recipe, must be array of strings/ingredients. the string must not have step counts],
                     instructions: [prep and cooking recipe with precise instructions, it must be array of strings (steps)]
-                }`
+                }
+                
+                be careful with the instructions array, you should not add any count in the array. like ["1. recipe step", "2. recipe step"], it should be like ["recipe test", "recipe test"]
+                
+                another example would be:
+                - wrong format
+                ingredients: [
+                    "1. Heat oil in a pan over medium heat.",
+                    "2. Add the chopped cabbage and sliced chilli to the pan.",
+                    "3. Stir-fry for 5-7 minutes until the cabbage is tender.",
+                    "4. Season with salt and pepper to taste.",
+                    "5. Serve hot as a side dish or with rice."
+                ]
+                - right format
+                [
+                    "Heat oil in a pan over medium heat.",
+                    "Add the chopped cabbage and sliced chilli to the pan.",
+                    "Stir-fry for 5-7 minutes until the cabbage is tender.",
+                    "Season with salt and pepper to taste.",
+                    "Serve hot as a side dish or with rice."
+                ]
+
+                `
+
+                
             },
             {
                 "role": "user",
