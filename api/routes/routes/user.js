@@ -27,15 +27,15 @@ router.post('/login', (req, res, next) => {
                 }
                 //Email correct and Password correct
                 if(result){
-                    const token = jwt.sign({
-                        email: user.email,
-                        userID: user[0]._id
-                    }, process.env.JWT_KEY, {
-                        expiresIn: "1h"
-                    })
+                    // const token = jwt.sign({
+                    //     email: user.email,
+                    //     userID: user[0]._id
+                    // }, process.env.JWT_KEY, {
+                    //     expiresIn: "1h"
+                    // })
                     return res.status(200).json({
                         message: 'Login in',
-                        token: token
+                        email: req.body.email
                     });
                 }
                 //Email correct but password wrong
