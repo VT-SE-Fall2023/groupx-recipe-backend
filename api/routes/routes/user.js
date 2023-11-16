@@ -98,9 +98,9 @@ router.post('/register',(req, res, next) => {
 });
 
 // Fetch user's recipe history.
-router.post('/recipeHistory', async (req, res, next) => {
+router.post('/recipeHistory', async (req, res) => {
     const {email} = req.body
-    await recipemodel.find({email}).then((docs) => res.status(200).json(docs)).catch((err) => console.log(err))
+    recipemodel.find({email}).then((docs) => res.status(200).json(docs)).catch((err) => console.log(err))
 })
 
 module.exports = router;

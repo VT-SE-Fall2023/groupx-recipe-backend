@@ -47,6 +47,7 @@ router.post('/', async (req, res, next) => {
 // Rate recipe
 router.post('/rate', async (req, res, next) => {
     const { id, rating } = req.body;
+    if (!id || !rating)   res.status(500).json({ "message": "Please provide required parameters {rating, id}"})
     try {
         await recipemodel.updateOne(
             { _id: id },
