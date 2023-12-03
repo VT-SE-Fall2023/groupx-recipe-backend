@@ -1,4 +1,4 @@
-const http = require('http'); //The way node js to import packages
+const http = require('http');
 const app = require('./app');
 require("dotenv").config();
 const port = process.env.PORT || 3000; //If not use the envorinment settled port, 3000

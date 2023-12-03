@@ -5,7 +5,6 @@ const url = require('url')
 const recipemodel = require('../models/recipemodel');
 
 const storeRecipe = async (recipe, email) => {
-    console.log(recipe, 'from the ')
     const {name, ingredients, instructions} = JSON.parse(recipe)
     const ingredient = new recipemodel({
         _id: new mongoose.Types.ObjectId(),
