@@ -7,39 +7,40 @@ const usermodel = require('../models/usermodel');
 const recipemodel = require('../models/recipemodel');
 const { default: mongoose } = require('mongoose');
 const { token } = require('morgan');
+const validateEmail = (email) => {
+    let re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
 
 //User Login
 router.post('/login', (req, res, next) => {
+    if (!req.body.email || !req.body.password) return res.status(400).send("Email and/or Password fields are missing")
+    if (!validateEmail(req.body.email)) return res.status(400).send("Email address invalid")
     usermodel.find({email: req.body.email}).exec()
         .then(user => {
             //If we cannot find a user
             if(user.length < 1){
-                return res.status(401).json({
+                return res.status(400).json({
                     message: 'Failed to Loggin'
                 })
             }
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
                 //Server error
                 if(err){
-                    return res.status(401).json({
+                    return res.status(400).json({
                         message: 'Failed to Loggin'
                     })
                 }
                 //Email correct and Password correct
                 if(result){
-                    // const token = jwt.sign({
-                    //     email: user.email,
-                    //     userID: user[0]._id
-                    // }, process.env.JWT_KEY, {
-                    //     expiresIn: "1h"
-                    // })
                     return res.status(200).json({
                         message: 'Login in',
                         email: req.body.email
                     });
                 }
                 //Email correct but password wrong
-                return res.status(500).json({
+                return res.status(400).json({
+                    error: true,
                     message: 'Failed to Loggin'
                 })
             })
@@ -54,6 +55,9 @@ router.post('/login', (req, res, next) => {
 
 //User create new account
 router.post('/register',(req, res, next) => {
+    if (!req.body.email || !req.body.password) return res.status(400).send("Email and/or Password fields are missing")
+    if (!validateEmail(req.body.email)) return res.status(400).send("Email address invalid")
+    if (req.body.password.length < 4) return res.status(400).send("Password too short")
     //Check if the email has already exist in DB or not
     usermodel.find({email: req.body.email}).exec()
         .then(user => {
@@ -80,7 +84,6 @@ router.post('/register',(req, res, next) => {
                         })
                         user.save()
                         .then(result => {
-                            console.log(result);
                             return res.status(201).json({
                                 message: 'Account created'
                             })
@@ -100,7 +103,9 @@ router.post('/register',(req, res, next) => {
 // Fetch user's recipe history.
 router.post('/recipeHistory', async (req, res) => {
     const {email} = req.body
-    recipemodel.find({email}).then((docs) => res.status(200).json(docs)).catch((err) => console.log(err))
+    if (!req.body.email) return res.status(400).send("Email fields are missing")
+    if (!validateEmail(req.body.email)) return res.status(400).send("Email address invalid")
+    await recipemodel.find({email}).then((docs) => res.status(200).json(docs)).catch((err) => console.log(err))
 })
 
 module.exports = router;

@@ -42,8 +42,6 @@ const getGPTResponse = async (ingredients) => {
                 ]
 
                 `
-
-                
             },
             {
                 "role": "user",
