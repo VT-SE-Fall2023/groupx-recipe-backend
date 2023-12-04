@@ -38,6 +38,7 @@ router.post('/', async (req, res, next) => {
 // Rate recipe
 router.post('/rate', async (req, res, next) => {
     const { id, rating } = req.body;
+
     if (!rating) return res.status(400).send("No rating field provided")
     if (!Boolean(Number(rating))) return res.status(400).send("Rating should be string number")
     if (!id) return res.status(400).send("No id field provided")
@@ -50,10 +51,10 @@ router.post('/rate', async (req, res, next) => {
             { _id: id },
             { $set: { rating: rating } }
         );
-        res.status(200).send("Rating updated successfully");
+        res.status(200).json({ "message": "Rating updated successfully" })
     } catch (err) {
         console.log(err);
-        res.status(500).send("Internal Server Error");
+        res.status(500).json({ "message": "Error Occured" })
     }
 });
 

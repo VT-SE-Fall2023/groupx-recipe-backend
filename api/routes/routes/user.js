@@ -101,7 +101,7 @@ router.post('/register',(req, res, next) => {
 });
 
 // Fetch user's recipe history.
-router.post('/recipeHistory', async (req, res, next) => {
+router.post('/recipeHistory', async (req, res) => {
     const {email} = req.body
     if (!req.body.email) return res.status(400).send("Email fields are missing")
     if (!validateEmail(req.body.email)) return res.status(400).send("Email address invalid")
